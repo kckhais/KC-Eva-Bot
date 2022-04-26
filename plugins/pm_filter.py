@@ -408,7 +408,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ], [
             InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
             InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
-        ], [
+        ], 
+        [
+            InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
+            ],
+            [
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
         ]]
