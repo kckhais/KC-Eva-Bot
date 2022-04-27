@@ -2,6 +2,7 @@ import logging
 from struct import pack
 import re
 import base64
+from turtle import width
 from pyrogram.file_id import FileId
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
@@ -25,6 +26,9 @@ class Media(Document):
     file_size = fields.IntField(required=True)
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
+    width = fields.IntField(allow_none=True)
+    height = fields.IntField(allow_none=True)
+    duration = fields.IntField(allow_none=True)
     caption = fields.StrField(allow_none=True)
 
     class Meta:
@@ -46,6 +50,9 @@ async def save_file(media):
             file_size=media.file_size,
             file_type=media.file_type,
             mime_type=media.mime_type,
+            width=media.width,
+            height=media.height,
+            duration=media.duration,
             caption=media.caption.html if media.caption else None,
         )
     except ValidationError:
