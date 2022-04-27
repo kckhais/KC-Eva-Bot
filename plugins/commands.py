@@ -49,8 +49,8 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('⚜️ Backup Channel ⚜️', url='https://t.me/+7AyTKA_SqdsyNWNl'),
-            InlineKeyboardButton('🧲 Backup Group 🧲', url='https://t.me/KC_Filmz')
+            InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
+            InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
             ],
             [
             InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
@@ -81,12 +81,9 @@ async def start(client, message):
         ]
 
         if message.command[1] != "subscribe":
-            try:
-                kk, file_id = message.command[1].split("_", 1)
-                pre = 'checksubp' if kk == 'filep' else 'checksub' 
-                btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
-            except IndexError:
-                btn.append([InlineKeyboardButton(" 🔄 Try Again", url=f"https://t.me/{temp.U_NAME}/{message.command[1]}")])
+            kk, file_id = message.command[1].split("_", 1)
+            pre = 'checksubp' if kk == 'filep' else 'checksub' 
+            btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
         await client.send_message(
             chat_id=message.from_user.id,
             text="**Please Join Main Updates Channel to use this Bot!**",
@@ -98,8 +95,8 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('⚜️ Backup Channel ⚜️', url='https://t.me/+7AyTKA_SqdsyNWNl'),
-            InlineKeyboardButton('🧲 Backup Group 🧲', url='https://t.me/KC_Filmz')
+            InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
+            InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
             ],[
             InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
             ],[
@@ -485,6 +482,8 @@ async def settings(client, message):
             parse_mode="html",
             reply_to_message_id=message.message_id
         )
+
+
 
 @Client.on_message(filters.command('set_template'))
 async def save_template(client, message):

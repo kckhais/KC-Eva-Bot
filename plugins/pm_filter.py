@@ -9,7 +9,7 @@ import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, CH_FILTER, CH_LINK
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -143,24 +143,6 @@ async def advantage_spoll_choker(bot, query):
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     if query.data == "close_data":
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ</b>"
-        )
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ</b>⭗ ⭗ ⭗ ⭗ ⭗ ⭗"
-        )
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ ɪɴ ᴘʀᴏɢʀᴇꜱꜱ</b>⦿ ⦿ ⦿ ⭗ ⭗ ⭗"
-        )
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ ɪɴ ᴘʀᴏɢʀᴇꜱꜱ</b>⦿ ⦿ ⦿ ⦿ ⭗ ⭗"
-        )
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ 𝙸𝙽 𝙿𝚁𝙾𝙶𝚁𝙴𝚂𝚂</b>⦿ ⦿ ⦿ ⦿ ⦿ ⭗"
-        )
-        await query.message.edit(
-            text="<b>Cʟᴏꜱɪɴɢ ɪɴ ᴘʀᴏɢʀᴇꜱꜱ</b>⦿ ⦿ ⦿ ⦿ ⦿ ⦿"
-        )
         await query.message.delete()
     elif query.data == "delallconfirm":
         userid = query.from_user.id
@@ -355,7 +337,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         files = files_[0]
         title = files.file_name
         size = get_size(files.file_size)
-        type = files.file_type
         f_caption = files.caption
         settings = await get_settings(query.message.chat.id)
         if CUSTOM_FILE_CAPTION:
@@ -363,10 +344,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption = CUSTOM_FILE_CAPTION.format(file_name='' if title is None else title,
                                                        file_size='' if size is None else size,
                                                        file_caption='' if f_caption is None else f_caption)
-
-                buttons = [[
-                  InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
-                  ]]
             except Exception as e:
                 logger.exception(e)
             f_caption = f_caption
@@ -381,40 +358,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
                 return
             else:
-                ms = await client.send_cached_media(
-                    chat_id=CH_FILTER,
+                await client.send_cached_media(
+                    chat_id=query.from_user.id,
                     file_id=file_id,
                     caption=f_caption,
                     protect_content=True if ident == "filep" else False 
                 )
-                msg1 = await query.message.reply(
-                f'<b>Hey 👋{query.from_user.mention}\n'
-                f'<b>📫 Yᴏuʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇\n\n'
-                f'<b>↬ ғɪʟᴇ ɴᴀᴍᴇ: </b><code>{title}</code>\n'
-                f'<b>↬ sɪᴢᴇ:</b> {size}\n\n'
-                '<code>𝘛𝘩𝘪𝘴 𝘍𝘪𝘭𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘪𝘯 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴.!</code>',
-                True,
-                'html',
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("📥 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐭𝐡𝐞 𝐅𝐢𝐥𝐞 📥", url = ms.link)
-                        ],
-                        [
-                            InlineKeyboardButton("⚠️ 𝐂𝐚𝐧'𝐭 𝐕𝐢𝐞𝐰 𝐓𝐡𝐞 𝐅𝐢𝐥𝐞 ❓ 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 ⚠️", url = f"{CH_LINK}")
-                        ]
-                    ]
-                )
-            )
-            await query.answer('Check Out The Chat',show_alert=True)
-            await asyncio.sleep(300)
-            await msg1.delete()
-            await msg.delete()
-            del msg1, msg
+                await query.answer(f'Hey {query.from_user.first_name} Check PM, I have sent files in pm',show_alert = True)
+        except UserIsBlocked:
+            await query.answer(f'Hey {query.from_user.first_name} Unblock the bot mahn !', show_alert=True)
+        except PeerIdInvalid:
+            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         except Exception as e:
-            logger.exception(e, exc_info=True)
-            await query.answer(f"Encountering Issues", True)
-
+            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
     elif query.data.startswith("checksub"):
         if AUTH_CHANNEL and not await is_subscribed(client, query):
             await query.answer(f"Hey, {query.from_user.first_name}! I Like Your Smartness, But Don't Be Oversmart 😒",show_alert=True)
@@ -432,17 +388,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption = CUSTOM_FILE_CAPTION.format(file_name='' if title is None else title,
                                                        file_size='' if size is None else size,
                                                        file_caption='' if f_caption is None else f_caption)
-                buttons = [[
-                  InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
-                  ]]
             except Exception as e:
                 logger.exception(e)
                 f_caption = f_caption
         if f_caption is None:
             f_caption = f"{title}"
         await query.answer()
-        ms = await client.send_cached_media(
-            chat_id=CH_FILTER,
+        await client.send_cached_media(
+            chat_id=query.from_user.id,
             file_id=file_id,
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
@@ -453,8 +406,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
-            InlineKeyboardButton('⚜️ Backup Channel ⚜️', url='https://t.me/+7AyTKA_SqdsyNWNl'),
-            InlineKeyboardButton('🧲 Backup Group 🧲', url='https://t.me/KC_Filmz')
+            InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
+            InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
         ], 
         [
             InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
@@ -717,26 +670,11 @@ async def auto_filter(client, msg, spoll=False):
         req = message.from_user.id if message.from_user else 0
         btn.append(
             [InlineKeyboardButton(text=f"🗓 1/{round(int(total_results) / 10)}", callback_data="pages"),
-            InlineKeyboardButton('🗑', callback_data='close_data'),
              InlineKeyboardButton(text="NEXT ⏩", callback_data=f"next_{req}_{key}_{offset}")]
-        )
-        btn.insert(0,
-            [InlineKeyboardButton(text="🔰 Main Group 🔰",url="https://t.me/KC_Films")]
-            )
-        btn.insert(0,
-            [InlineKeyboardButton(text="⚜️ Backup Channel ⚜️",url="https://t.me/+7AyTKA_SqdsyNWNl"),
-             InlineKeyboardButton(text="🧲 Backup Group 🧲",url="https://t.me/KC_Filmz")]
         )
     else:
         btn.append(
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
-        )
-        btn.insert(0,
-            [InlineKeyboardButton(text="🔰 Main Group 🔰",url="https://t.me/KC_Films")]
-            )
-        btn.insert(0,
-            [InlineKeyboardButton(text="⚜️ Backup Channel ⚜️",url="https://t.me/+7AyTKA_SqdsyNWNl"),
-             InlineKeyboardButton(text="🧲 Backup Group 🧲",url="https://t.me/KC_Filmz")]
         )
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
@@ -773,10 +711,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"""Hey 👋 {message.from_user.mention}😍
-
- 📁 ғᴏᴜɴᴅ ✨ ғɪʟᴇs ғᴏʀ ʏᴏᴜʀ ǫᴜᴇʀʏ : {search} 👇\n
- <b>🎬 Title:</b> {search}\n</b>\n<b>✍️ Note:</b> ミ★ 𝙏𝙝𝙞𝙨 𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙬𝙞𝙡𝙡 𝙗𝙚 𝘼𝙪𝙩𝙤-𝙙𝙚𝙡𝙚𝙩𝙚𝙙 𝙖𝙛𝙩𝙚𝙧 5 𝙈𝙞𝙣𝙪𝙩𝙚𝙨 𝙩𝙤 𝘼𝙫𝙤𝙞𝙙 𝘾𝙤𝙥𝙮𝙧𝙞𝙜𝙝𝙩 𝙄𝙨𝙨𝙪𝙚𝙨 ★彡\n\n<b>╔══ 𝘑𝘰𝘪𝘯 ★ 𝘚𝘩𝘢𝘳𝘦 ★ 𝘚𝘶𝘱𝘱𝘰𝘳𝘵 ══╗\n♻️ ᴊᴏɪɴ :- [⚜️ Backup Channel ⚜️](https://t.me/+7AyTKA_SqdsyNWNl)\n♻️ ᴊᴏɪɴ :- [🔰 Main Group 🔰](https://t.me/KC_Films)\n♻️ ᴊᴏɪɴ :- [🧲 Backup Group 🧲](https://t.me/KC_Filmz)\n╚══ 𝘑𝘰𝘪𝘯 ★ 𝘚𝘩𝘢𝘳𝘦 ★ 𝘚𝘶𝘱𝘱𝘰𝘳𝘵 ══╝\n\n\n<b>💘 Team ➜ [💫 KC Filmss 💫](https://t.me/KCFilmss)</b>\n ✯ ━━━━━ ✧ ━━━━━ ✯\n</b>"""
+        cap = f"<b>🎬 Title:</b> {search}\n</b>\n<b>✍️ Note:</b> ミ★ 𝘛𝘩𝘪𝘴 𝘔𝘦𝘴𝘴𝘢𝘨𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘈𝘶𝘵𝘰-𝘥𝘦𝘭𝘦𝘵𝘦𝘥 𝘢𝘧𝘵𝘦𝘳 𝘢 𝘍𝘦𝘸 𝘔𝘪𝘯𝘶𝘵𝘦𝘴 𝘵𝘰 𝘢𝘷𝘰𝘪𝘥 𝘊𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵 𝘪𝘴𝘴𝘶𝘦𝘴 ★彡\n\n<b>╔══ 𝘑𝘰𝘪𝘯 ★ 𝘚𝘩𝘢𝘳𝘦 ★ 𝘚𝘶𝘱𝘱𝘰𝘳𝘵 ══╗\n♻️ ᴊᴏɪɴ :- [⚜️ Backup Channel ⚜️](https://t.me/+7AyTKA_SqdsyNWNl)\n♻️ ᴊᴏɪɴ :- [🔰 Main Group 🔰](https://t.me/KC_Films)\n♻️ ᴊᴏɪɴ :- [🧲 Backup Group 🧲](https://t.me/KC_Filmz)\n╚══ 𝘑𝘰𝘪𝘯 ★ 𝘚𝘩𝘢𝘳𝘦 ★ 𝘚𝘶𝘱𝘱𝘰𝘳𝘵 ══╝\n\n\n💘 Team ➜ [💫 KC Filmss 💫](https://t.me/KCFilmss)\n ✯ ━━━━━ ✧ ━━━━━ ✯\n</b>"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
@@ -856,7 +791,7 @@ async def advantage_spell_chok(msg):
         )
     ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply(f"Hey 👋, {msg.from_user.mention}!\nI couldn't find anything related to that\nDid you mean any one of these?", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply(f"Hey, {msg.from_user.mention}!\nI couldn't find anything related to that\nDid you mean any one of these?", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(20)
     await m.delete()
 
