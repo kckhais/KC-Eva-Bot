@@ -5,7 +5,7 @@ import asyncio
 from Script import script
 from pyrogram import Client, filters
 from pyrogram.errors import ChatAdminRequired, FloodWait
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
@@ -49,14 +49,12 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
-            InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
-            ],
-            [
-            InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
+            InlineKeyboardButton('⚜️ Backup Channel ⚜️', url='https://t.me/+7AyTKA_SqdsyNWNl'),
+            InlineKeyboardButton('🧲 Backup Group 🧲', url='https://t.me/KC_Filmz')
             ],[
+            InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')],[
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
+            InlineKeyboardButton('😊 About', callback_data='about')        
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -81,9 +79,12 @@ async def start(client, message):
         ]
 
         if message.command[1] != "subscribe":
-            kk, file_id = message.command[1].split("_", 1)
-            pre = 'checksubp' if kk == 'filep' else 'checksub' 
-            btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
+            try:
+                kk, file_id = message.command[1].split("_", 1)
+                pre = 'checksubp' if kk == 'filep' else 'checksub' 
+                btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
+            except IndexError:
+                btn.append([InlineKeyboardButton(" 🔄 Try Again", url=f"https://t.me/{temp.U_NAME}/{message.command[1]}")])
         await client.send_message(
             chat_id=message.from_user.id,
             text="**Please Join Main Updates Channel to use this Bot!**",
@@ -95,13 +96,12 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
-            InlineKeyboardButton('⚡️ Main Channel ⚡️', url='https://t.me/KCFilmss'),
-            InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/KC_Films')
+            InlineKeyboardButton('⚜️ Backup Channel ⚜️', url='https://t.me/+7AyTKA_SqdsyNWNl'),
+            InlineKeyboardButton('🧲 Backup Group 🧲', url='https://t.me/KC_Filmz')
             ],[
-            InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')
-            ],[
+            InlineKeyboardButton('👤 Owner 👤', url='https://t.me/KCCut')],[
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
+            InlineKeyboardButton('😊 About', callback_data='about')               
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -253,7 +253,6 @@ async def start(client, message):
         caption=f_caption,
         protect_content=True if pre == 'filep' else False,
         )
-                    
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
@@ -482,9 +481,7 @@ async def settings(client, message):
             parse_mode="html",
             reply_to_message_id=message.message_id
         )
-
-
-
+    
 @Client.on_message(filters.command('set_template'))
 async def save_template(client, message):
     sts = await message.reply("Checking template")

@@ -1,15 +1,3 @@
-<h1 align="center">
-  <b>KC Eva Bot</b>
-</h1>
-
-[![Stars](https://img.shields.io/github/stars/kckhais/KC-Eva-Bot?style=flat-square&color=yellow)](https://github.com/kckhais/KC-Eva-Bot/stargazers)
-[![Forks](https://img.shields.io/github/forks/kckhais/KC-Eva-Bot?style=flat-square&color=orange)](https://github.com/kckhais/KC-Eva-Bot/fork)
-[![Size](https://img.shields.io/github/repo-size/kckhais/KC-Eva-Bot?style=flat-square&color=green)](https://github.com/kckhais/KC-Eva-Bot/)   
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/kckhais/KC-Eva-Bot)   
-[![Contributors](https://img.shields.io/github/contributors/kckhais/KC-Eva-Bot?style=flat-square&color=green)](https://github.com/kckhais/KC-Eva-Bot/graphs/contributors)
-[![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/kckhais/KC-Eva-Bot/blob/main/LICENSE)
-
-
 ## Features
 
 - [x] Auto Filter
@@ -37,6 +25,8 @@ Read [this](https://telegram.dog/TeamEvamaria/12) before you start messing up wi
 * `ADMINS`: Username or ID of Admin. Separate multiple Admins by space
 * `DATABASE_URI`: [mongoDB](https://www.mongodb.com) URI. Get this value from [mongoDB](https://www.mongodb.com). For more help watch this [video](https://youtu.be/1G1XwEOnxxo)
 * `DATABASE_NAME`: Name of the database in [mongoDB](https://www.mongodb.com). For more help watch this [video](https://youtu.be/1G1XwEOnxxo)
+* `CH_FILTER` : File Channel ID (-100xxxx). Make sure bot is an admin in the channel.
+* `CH_LINK` : File Channel Link (http://t.me/+xxxxxx)
 * `LOG_CHANNEL` : A channel to log the activities of bot. Make sure bot is an admin in the channel.
 ### Optional Variables
 * `PICS`: Telegraph links of images to show in start message.( Multiple images can be used separated by space )
@@ -44,32 +34,14 @@ Read [this](https://telegram.dog/TeamEvamaria/12) before you start messing up wi
 * Check [info.py](https://github.com/kckhais/KC-Eva-Bot/blob/master/info.py) for more
 
 
-## Deploy
-You can deploy this bot anywhere.
-
-<i>**[Watch Deploying Tutorial...](https://youtu.be/1G1XwEOnxxo)**</i>
-
 <details><summary>Deploy To Heroku</summary>
 <p>
 <br>
-<a href="https://heroku.com/deploy?template=https://github.com/kckhais/KC-Eva-Bot">
+<a href="https://heroku.com/deploy?template=https://github.com/kckhais/KC-Eva-Bot/tree/main">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 </p>
 </details>
-
-<details><summary>Deploy To VPS</summary>
-<p>
-<pre>
-git clone https://github.com/kckhais/KC-Eva-Bot
-# Install Packages
-pip3 install -r requirements.txt
-Edit info.py with variables as given below then run bot
-python3 bot.py
-</pre>
-</p>
-</details>
-
 
 ## Commands
 ```
@@ -99,12 +71,9 @@ python3 bot.py
 • /batch - to create link for multiple posts
 • /link - to create link for one post
 ```
-## Support
-[![telegram badge](https://img.shields.io/badge/Telegram-Group-30302f?style=flat&logo=telegram)](https://telegram.dog/KCFilmss)
-[![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/KC_Films)
-
 
 ## Thanks to 
+ - Thanks To farshadpyt For His Awesome [EvaMaria](https://github.com/farshadpyt/EvaMaria)
  - Thanks To EvaMaria-Devs For Thier Awesome [EvaMaria](https://github.com/EvamariaTG/EvaMaria)
  - Thanks To Dan For His Awesome [Library](https://github.com/pyrogram/pyrogram)
  - Thanks To Mahesh For His Awesome [Media-Search-bot](https://github.com/Mahesh0253/Media-Search-bot)

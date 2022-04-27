@@ -1,10 +1,55 @@
 class script(object):
-    START_TXT = """𝐇𝐢 {},
-𝐌𝐲 𝐍𝐚𝐦𝐞 𝐢𝐬 <a href=https://t.me/{}>{}</a>, 𝐈 𝐂𝐚𝐧 𝐏𝐫𝐨𝐯𝐢𝐝𝐞 𝐘𝐨𝐮 𝐌𝐨𝐯𝐢𝐞𝐬/𝐒𝐞𝐫𝐢𝐞𝐬, 𝐉𝐮𝐬𝐭 𝐀𝐝𝐝 𝐌𝐞 𝐓𝐨 𝐘𝐨𝐮𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 & 𝐄𝐧𝐣𝐨𝐲 😍"""
+    SERCH_MOVIE = """𝐇𝐢 {},
+നിങ്ങൾക്ക് ആവശ്യമുള്ള സിനിമകൾ ഇവിടെ നിന്ന് എടുക്കാം. 
 
-    HELP_TXT = """𝐇𝐢 {}
-𝐇𝐞𝐫𝐞 𝐢𝐬 𝐦𝐲 𝐇𝐞𝐥𝐩 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬"""
+ ɴʙ: DVD ഇറങ്ങിയാൽ മാത്രമേ സിനിമകൾ ലഭിക്കൂ 😜"""
+    CMD_LIST = """𝐇𝐢 {},
+• /id - get id of a specifed user. 
+ • /info  - get information about a user. 
+ • /imdb  - get the film information from IMDb source. 
+ • /search  - get the film information from various sources. 
+ • /whois :-give a user full details 
 
+ ᴛʜɪs ɪs ғᴏʀ ᴀᴅᴍɪɴs 
+
+• /logs - to get the rescent errors 
+• /stats - to get status of files in db. 
+• /delete - to delete a specific file from db. 
+• /users - to get list of my users and ids. 
+• /chats - to get list of the my chats and ids 
+• /leave  - to leave from a chat. 
+• /disable  -  do disable a chat. 
+• /ban  - to ban a user. 
+• /unban  - to unban a user. 
+• /channel - to get list of total connected channels 
+ • /broadcast - to broadcast a message to all users. 
+ • /connect  - connect a particular chat to your PM. 
+• /disconnect  - disconnect from a chat. 
+• /connections - list all your connections. 
+• /pin :- Pin The Message You Replied To Message To Send A Notification To Group Members. 
+• /unpin :- Unpin The Current Pinned Message. If Used As A Reply, Unpins The Replied To Message. 
+• /filter - add a filter in chat. 
+• /filters - list all the filters of a chat. 
+• /del - delete a specific filter in chat. 
+• /delall - delete the whole filters in a chat (chat owner only)"""
+    BOT_TXT = """𝐇𝐢 {},
+➪ എങ്ങനെ നിങ്ങൾക്ക് ഈ ബോട്ട് പ്രവർത്തിപ്പിക്കാം
+ 
+➪ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ. 
+
+/update - മെയിൻ ചാനലിൽ ജോയിൻ ചെയ്യാനുള്ള ലിങ്ക് വേണമെങ്കിൽ ഈ കമാൻഡ് ഉപയോഗിക്കാം 😀"""
+    UPDATE_CMD = """𝐇𝐢 {}, 
+➪ ബോട്ട് പ്രവർത്തിക്കണമെങ്കിൽ താഴെ കാണുന്ന മെയിൻ ചാനലിൽ ജോയിൻ ചെയ്യുക. 
+
+➪ എന്തിനാണ് മെയിൻ ചാനലിൽ ജോയിൻ ചെയ്യുന്നത് എന്ന് നിങ്ങൾക്ക് സംശയം തോന്നാം, കാരണം മെയിൻ ചാനലിന്റെ ലിങ്ക് സ്ഥിരമായിരിക്കും, ഈ ചാനലിൽ കൂടിയാണ് ബോട്ട് അപ്ഡേറ്റ്സും മൂവി ചാനലിന്റെ ലിങ്കും ഇടുന്നത്. 
+
+➪ മറ്റു ചാനലുകളെ അപേക്ഷിച്ചു മെയിൻ ചാനലിന് കോപ്പിറൈറ് വരുന്നതിനുള്ള സാധ്യയത കുറവാരിക്കും 😀"""
+    START_TXT = """Hᴇʏ {} {},
+Mʏ ɴᴀᴍᴇ ɪꜱ <a href=https://t.me/{}>{}</a>, I ᴀᴍ ᴊᴜsᴛ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ Aᴜᴛᴏғɪʟᴛᴇʀ Bᴏᴛ Wɪᴛʜ ᴇxᴛʀᴀ ᴄᴀᴘᴀʙɪʟɪᴛɪᴇs.Aᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴀs ᴀᴅᴍɪɴ ᴀɴᴅ I'ʟʟ ᴘʀᴏᴠɪᴅᴇ ᴍᴏᴠɪᴇs ᴛʜᴇʀᴇ 😍
+
+➪ /bot - ബോട്ടിനെ കുറിച്ചും ഇത് ഉപയോഗിക്കേണ്ടരീതിയെക്കുറിച്ചറിയാൻ ഈ കമാൻഡ് ഉപയോഗിക്കാവുന്നതാണ് 😀"""
+    HELP_TXT = """𝙷𝙴𝚈 {}
+𝙷𝙴𝚁𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙷𝙴𝙻𝙿 𝙵𝙾𝚁 𝙼𝚈 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
     ABOUT_TXT = """► 𝐌𝐲 𝐍𝐚𝐦𝐞: {}
 ► 𝐋𝐢𝐛𝐫𝐚𝐫𝐲: Pyrogram
 ► 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞: MongoDB
@@ -21,6 +66,7 @@ class script(object):
 
  
 <b>💘 Team ➜ <a href=https://t.me/KCFilmss>💫 KC Filmss 💫</a>\n✯ ━━━━━ ✧ ━━━━━ ✯</b>\n"""
+
     MANUELFILTER_TXT = """Help: <b>Filters</b>
 
 - Filter is the feature were users can set automated replies for a particular keyword and EvaMaria will respond whenever a keyword is found the message
@@ -35,7 +81,8 @@ class script(object):
 • /filters - <code>list all the filters of a chat</code>
 • /del - <code>delete a specific filter in chat</code>
 • /delall - <code>delete the whole filters in a chat (chat owner only)</code>"""
-    BUTTON_TXT = """Help: <b>Buttons</b>
+
+    """Help: <b>Buttons</b>
 
 - This Supports both url and alert inline buttons.
 
