@@ -7,7 +7,7 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
+from info import DATABASE_URI, DATABASE_NAME, COLLECTION_NAME
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -25,7 +25,6 @@ class Media(Document):
     file_size = fields.IntField(required=True)
     file_type = fields.StrField(allow_none=True)
     mime_type = fields.StrField(allow_none=True)
-    caption = fields.StrField(allow_none=True)
 
     class Meta:
         indexes = ('$file_name', )
@@ -45,8 +44,7 @@ async def save_file(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type,
-            caption=media.caption.html if media.caption else None,
+            mime_type=media.mime_type
         )
     except ValidationError:
         logger.exception('Error occurred while saving file in database')
@@ -85,11 +83,6 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)
     except:
         return []
-
-    if USE_CAPTION_FILTER:
-        filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
-    else:
-        filter = {'file_name': regex}
 
     if file_type:
         filter['file_type'] = file_type
